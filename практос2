@@ -1,0 +1,101 @@
+﻿using System;
+using System.Linq;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int choice;
+
+        do
+        {
+            Console.WriteLine("Выберите нужную программу:");
+            Console.WriteLine("1. Игра 'Угадай число'");
+            Console.WriteLine("2. Таблица умножения");
+            Console.WriteLine("3. Вывод делителей числа");
+            Console.WriteLine("4. Выход");
+
+            choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    PlayGuessTheNumberGame();
+                    break;
+                case 2:
+                    MultiplicationTable();
+                    break;
+                case 3:
+                    Divisors();
+                    break;
+                case 4:
+                    Console.WriteLine("До свидания!");
+                    break;
+                default:
+                    Console.WriteLine("Неверный выбор");
+                    break;
+            }
+        } while (choice != 4);
+    }
+
+    static void PlayGuessTheNumberGame()
+    {
+        Random random = new Random();
+        int hiddenNumber = random.Next(0, 101);
+        int userNumber;
+
+        do
+        {
+            Console.WriteLine("Угадайте число от 0 до 100");
+            Console.Write("Введите число: ");
+            userNumber = Convert.ToInt32(Console.ReadLine());
+
+            if (userNumber < hiddenNumber)
+                Console.WriteLine("Больше!");
+            else if (userNumber > hiddenNumber)
+                Console.WriteLine("Меньше!");
+
+        } while (userNumber != hiddenNumber);
+
+        Console.WriteLine("Поздравляем! Вы угадали число.");
+    }
+
+    static void MultiplicationTable()
+    {
+        int[,] multiplicationTable = new int[10, 10];
+
+        for (int i = 1; i <= 10; i++)
+        {
+            for (int j = 1; j <= 10; j++)
+            {
+                multiplicationTable[i - 1, j - 1] = i * j;
+            }
+        }
+
+        Console.WriteLine("Таблица умножения:");
+        for (int i = 1; i < 10; i++)
+        {
+            for (int j = 1; j < 10; j++)
+            {
+                Console.Write($"{i * j}\t");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void Divisors()
+    {
+        Console.Write("Введите число: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Делители числа: ");
+        for (int i = 1; i <= number; i++)
+        {
+            if (number % i == 0)
+                Console.Write(i + " ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
